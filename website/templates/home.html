@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Reports</h1>
+<ul class="list-group list-group-flush" id="reports">
+  {% for report in user.report %}
+  <li class="list-group-item">
+    {{ report.data }}
+    <button type="button" class="close" onClick="deleteReport('{{ report.id }}')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

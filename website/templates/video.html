@@ -3,19 +3,21 @@
 {% block title %}Video{% endblock %}
 
 {% block content %}
-<h1>Real-Time Emotion Detection</h1>
+<div class="container text-center mt-5">
+    <h1 class="mb-4">Real-Time Emotion Detection</h1>
 
-<div id="video-container" style="display: none;">
-    <img id="video-feed" width="640" height="480">
+    <div id="video-container" style="display: none; margin-bottom: 20px;">
+        <img id="video-feed" width="640" height="480" class="border rounded">
+    </div>
+
+    <div>
+        <button id="start-btn" class="btn btn-primary btn-lg">Start Recording</button>
+        <button id="stop-btn" style="display: none;" class="btn btn-danger btn-lg">Stop Recording</button>
+    </div>
+
+    <h2 class="mt-4">Emotion Summary</h2>
+    <div id="results" class="border p-3 rounded bg-light mt-3" style="max-height: 300px; overflow-y: auto;"></div>
 </div>
-
-<div>
-    <button id="start-btn">Record</button>
-    <button id="stop-btn" style="display: none;">Stop</button>
-</div>
-
-<h2>Emotion Summary</h2>
-<div id="results"></div>
 
 <script>
     const startBtn = document.getElementById('start-btn');

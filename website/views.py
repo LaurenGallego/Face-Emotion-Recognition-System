@@ -9,7 +9,21 @@ views = Blueprint('views', __name__)
 @views.route('/')
 @login_required
 def home():
-    return render_template("home.html", user=current_user)
+    reports = Report.query.filter_by(user_id=current_user.id).order_by(Report.date.desc()).all()
+
+    parsed_reports = []
+    for report in reports:
+        try:
+            emotion_data = json.loads(report.data)
+        except json.JSONDecodeError:
+            emotion_data = {"Invalid": "Data"}
+        parsed_reports.append({
+            "id": report.id,
+            "data": emotion_data,
+            "date": report.date.strftime("%B %d, %Y %H:%M")
+        })
+
+    return render_template("home.html", user=current_user, reports=parsed_reports)
 
 
 
